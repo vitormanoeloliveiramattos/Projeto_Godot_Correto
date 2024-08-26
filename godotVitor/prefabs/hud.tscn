@@ -1,0 +1,113 @@
+[gd_scene load_steps=8 format=3 uid="uid://xxhtrbis44nt"]
+
+[ext_resource type="Script" path="res://scripts/hud.gd" id="1_fkjxo"]
+[ext_resource type="FontFile" uid="uid://cwbt2ugsjq30h" path="res://font/Dihil.ttf" id="1_xvbvu"]
+[ext_resource type="StyleBox" uid="uid://dp7kh0msdy0an" path="res://button_style.tres" id="2_wn8k8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r4ntm"]
+bg_color = Color(0.453787, 0.159764, 0.84039, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 20.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ii7pc"]
+bg_color = Color(0.52549, 0.25098, 0.937255, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 20.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="InputEventAction" id="InputEventAction_5lxqm"]
+action = &"start_game"
+
+[sub_resource type="Shortcut" id="Shortcut_p4gpl"]
+events = [SubResource("InputEventAction_5lxqm")]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_fkjxo")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScoreLabel" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -59.0
+offset_top = 36.0
+offset_right = 59.0
+offset_bottom = 122.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_xvbvu")
+theme_override_font_sizes/font_size = 64
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MessageLabel" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.0
+offset_top = -142.0
+offset_right = 59.0
+offset_bottom = 71.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_xvbvu")
+theme_override_font_sizes/font_size = 50
+text = "Vitor Manoel Oliveira Mattos"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartButton" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -108.0
+offset_right = 28.0
+offset_bottom = -77.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.878431, 0.764706, 0.176471, 1)
+theme_override_colors/font_hover_color = Color(0.878431, 0.764706, 0.176471, 1)
+theme_override_colors/font_focus_color = Color(0.994108, 0.994108, 0.994108, 1)
+theme_override_fonts/font = ExtResource("1_xvbvu")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = ExtResource("2_wn8k8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_r4ntm")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ii7pc")
+theme_override_styles/normal = ExtResource("2_wn8k8")
+shortcut = SubResource("Shortcut_p4gpl")
+text = "START"
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="pressed" from="Control/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]

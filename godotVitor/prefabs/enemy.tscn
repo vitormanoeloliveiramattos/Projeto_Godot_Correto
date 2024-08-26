@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://dbjjnqhliv461"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_u0o8f"]
+[ext_resource type="Texture2D" uid="uid://cnkro1fabfe34" path="res://assets/1.png" id="2_5kg66"]
+[ext_resource type="Texture2D" uid="uid://bqpsihedxe8wp" path="res://assets/2.png" id="3_4iadk"]
+[ext_resource type="Texture2D" uid="uid://du1tyuu30r8yp" path="res://assets/4.png" id="4_x374l"]
+[ext_resource type="Texture2D" uid="uid://cxef8qux7dibk" path="res://assets/3.png" id="5_4csaj"]
+[ext_resource type="Texture2D" uid="uid://dcxrpou8g7cgo" path="res://assets/5.png" id="6_wh34e"]
+[ext_resource type="Texture2D" uid="uid://nxb3r7ifcjee" path="res://assets/6.png" id="7_h6wrs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b3ldx"]
+radius = 20.025
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_odgrv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5kg66")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_4iadk")
+}],
+"loop": true,
+"name": &"blue_beetle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_x374l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_4csaj")
+}],
+"loop": true,
+"name": &"red_beetle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_wh34e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_h6wrs")
+}],
+"loop": true,
+"name": &"yellow_beetle",
+"speed": 5.0
+}]
+
+[node name="enemy" type="RigidBody2D" groups=["bugs"]]
+position = Vector2(202, 226)
+collision_mask = 2
+gravity_scale = 0.0
+script = ExtResource("1_u0o8f")
+
+[node name="colision" type="CollisionShape2D" parent="."]
+position = Vector2(-6, -1)
+shape = SubResource("CircleShape2D_b3ldx")
+
+[node name="anim" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_odgrv")
+animation = &"yellow_beetle"
+
+[node name="visible" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-3, 1)
+
+[connection signal="screen_exited" from="visible" to="." method="_on_visible_screen_exited"]
